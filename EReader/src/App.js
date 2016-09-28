@@ -102,20 +102,29 @@ class App extends Component {
     render() {
         return <div id="book-container" >
                 <div id="book" ref={(c)=> this.book = c}></div>
-                {
-                    this.state.isShowRecordedNote &&
-                    <ModalContainer onClose={this.handleVideoNoteClose}>
-                        <ModalDialog onClose={this.handleVideoNoteClose}>
-                            <h1>Dialog Content</h1>
-                            <VideoNote blob={this.state.blob}></VideoNote>
-                        </ModalDialog>
-                    </ModalContainer>
-                }
+            {
+                this.state.isShowingModal &&
+                <ModalContainer onClose={this.handleClose}>
+                    <ModalDialog onClose={this.handleClose}>
+                        <h1>Dialog Content</h1>
+                        <MediaRecorder onSave={this.save}></MediaRecorder>
+                    </ModalDialog>
+                </ModalContainer>
+            }
+            {
+                this.state.isShowRecordedNote &&
+                <ModalContainer onClose={this.handleVideoNoteClose}>
+                    <ModalDialog onClose={this.handleVideoNoteClose}>
+                        <h1>Dialog Content</h1>
+                        <VideoNote blob={this.state.blob}></VideoNote>
+                    </ModalDialog>
+                </ModalContainer>
+            }
             <div className="footer">
                 <img src={left} onClick={() => this.goToPrevPage()}/>
                 <img src={right} onClick={() => this.goToNextPage()} className="right"/>
             </div>
-            </div>;
+        </div>;
     }
 }
 
