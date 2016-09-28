@@ -3,6 +3,8 @@ import './App.css';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import MediaRecorder from './components/MediaRecord';
 import shortid from 'shortid';
+import left from '../public/arrow-left.svg';
+import right from '../public/arrow-right.svg';
 
 /* globals Jigsaw */
 
@@ -53,6 +55,29 @@ class App extends Component {
             });
         });
     }
+    goToNextPage = () => {
+        this.viewer.Book.hasNextPage((result) => {
+            if(result.data) {
+                this.viewer.Book.goToNextPage((data) => {
+                    console.log(data);
+                });
+            } else {
+                alert('This is last page');
+            }
+        });
+
+    }
+    goToPrevPage = ()=> {
+        this.viewer.Book.hasPreviousPage((result) => {
+            if(result.data) {
+                this.viewer.Book.goToPreviousPage((data) => {
+                    console.log(data);
+                });
+            } else {
+                alert('This is first page');
+            }
+        });
+    }
 
     render() {
         return <div id="book-container" >
@@ -66,6 +91,10 @@ class App extends Component {
                     </ModalDialog>
                 </ModalContainer>
             }
+            <div className="footer">
+                <img src={left} onClick={() => this.goToPrevPage()}/>
+                <img src={right} onClick={() => this.goToNextPage()} className="right"/>
+            </div>
         </div>;
     }
 }

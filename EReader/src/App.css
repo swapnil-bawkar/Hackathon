@@ -18,3 +18,11 @@
   left: 25% !important;
   top: 5% !important;
 }
+.footer {
+  background-color: black;
+  color: #fff;
+  padding: 10px;
+}
+.right{
+  float: right
+}
