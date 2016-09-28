@@ -51,11 +51,6 @@ class MediaRecord extends Component {
             this.recordButton.textContent = 'Start Recording';
             this.playButton.disabled = false;
             this.setState({
-
-
-
-
-                
                 isShowingGum: false,
                 isShowingRecorded: true
             });
