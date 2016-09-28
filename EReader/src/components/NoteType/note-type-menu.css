@@ -1,0 +1,16 @@
+.note-type-container {
+    display: flex;
+    align-items: center;
+    align-content: space-around;
+}
+
+.note-type-container img {
+    padding: 8px;
+}
+
+.imagetype {
+    width: 48px;
+}
+.commentype {
+    width: 36px;
+}

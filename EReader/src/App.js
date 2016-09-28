@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
-import MediaRecorder from './components/MediaRecord';
 import shortid from 'shortid';
 import left from '../public/arrow-left.svg';
 import right from '../public/arrow-right.svg';
 import VideoNote from './components/video-note';
+import NoteTypeMenu from './components/NoteType/note-type-menu';
 
 /* globals Jigsaw */
 
@@ -61,7 +61,7 @@ class App extends Component {
     
     save = (recordedBlob) => {
         const noteId = shortid.generate();
-        this.viewer.Book.highlightCurrentSelection({markerId: 'T4UA3RTNATGPHJRCSME5'}, (event) => {
+        this.viewer.Book.highlightCurrentSelection({markerId: '5XAJX2YX3WD7W25KDAZA'}, (event) => {
             const highlight = event.data.highlight;
             const notes = this.state.notes;
             notes.push({
@@ -106,8 +106,7 @@ class App extends Component {
                 this.state.isShowingModal &&
                 <ModalContainer onClose={this.handleClose}>
                     <ModalDialog onClose={this.handleClose}>
-                        <h1>Dialog Content</h1>
-                        <MediaRecorder onSave={this.save}></MediaRecorder>
+                        <NoteTypeMenu handleClose={this.handleClose}></NoteTypeMenu>
                     </ModalDialog>
                 </ModalContainer>
             }
@@ -115,7 +114,6 @@ class App extends Component {
                 this.state.isShowRecordedNote &&
                 <ModalContainer onClose={this.handleVideoNoteClose}>
                     <ModalDialog onClose={this.handleVideoNoteClose}>
-                        <h1>Dialog Content</h1>
                         <VideoNote blob={this.state.blob}></VideoNote>
                     </ModalDialog>
                 </ModalContainer>
