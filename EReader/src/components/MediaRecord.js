@@ -6,8 +6,8 @@ class MediaRecord extends Component {
         super(props, context);
         this.initializeMediaRecorder();
         this.state = {
-            reccordedBlob: [],
-            sourceBuffer: []
+            isShowingGum: true,
+            isShowingRecorded: false
         };
         this.toggleRecording = this.toggleRecording.bind(this);
         this.play = this.play.bind(this);
@@ -15,7 +15,6 @@ class MediaRecord extends Component {
     }
 
     initializeMediaRecorder() {
-        this.reccordedBlob = [];
         const constraints = {
             audio: true,
             video: true
@@ -51,13 +50,21 @@ class MediaRecord extends Component {
             this.stopRecording();
             this.recordButton.textContent = 'Start Recording';
             this.playButton.disabled = false;
+            this.setState({
+
+
+
+
+                
+                isShowingGum: false,
+                isShowingRecorded: true
+            });
         }
     }
 
     stopRecording() {
         this.mediaRecorder.stop();
         console.log('Recorded Blobs: ', this.recordedBlobs);
-        this.recordedVideo.controls = true;
     }
 
     startRecording() {
@@ -106,8 +113,14 @@ class MediaRecord extends Component {
     render() {
         return (
             <div>
-                <video id="gum" ref={(c)=> this.gumVideo = c} autoPlay muted></video>
-                <video id="recorded" ref={(c)=> this.recordedVideo = c} autoPlay loop></video>
+                {
+                    this.state.isShowingGum &&
+                    <video id="gum" ref={(c)=> this.gumVideo = c} autoPlay muted></video>
+                }
+                {
+                    this.state.isShowingRecorded &&
+                    <video id="recorded" ref={(c)=> this.recordedVideo = c} autoPlay loop controls></video>
+                }
                 <div>
                     <button id="record" ref={(c)=> this.recordButton = c} onClick={this.toggleRecording}>Start Recording</button>
                     <button id="play" ref={(c)=> this.playButton = c} onClick={this.play}>Play</button>
