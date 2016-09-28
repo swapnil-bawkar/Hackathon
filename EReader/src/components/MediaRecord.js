@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 /* globals MediaRecorder */
 class MediaRecord extends Component {
@@ -7,7 +7,8 @@ class MediaRecord extends Component {
         this.initializeMediaRecorder();
         this.state = {
             isShowingGum: true,
-            isShowingRecorded: false
+            isShowingRecorded: false,
+            isShowSave: false
         };
         this.toggleRecording = this.toggleRecording.bind(this);
         this.play = this.play.bind(this);
@@ -34,7 +35,7 @@ class MediaRecord extends Component {
     }
 
     handleDataAvailable(event) {
-        if(event.data.size > 0) {
+        if (event.data.size > 0) {
             this.recordedBlobs.push(event.data);
         }
     }
@@ -49,7 +50,6 @@ class MediaRecord extends Component {
         } else {
             this.stopRecording();
             this.recordButton.textContent = 'Start Recording';
-            this.playButton.disabled = false;
             this.setState({
                 isShowingGum: false,
                 isShowingRecorded: true
@@ -60,6 +60,9 @@ class MediaRecord extends Component {
     stopRecording() {
         this.mediaRecorder.stop();
         console.log('Recorded Blobs: ', this.recordedBlobs);
+        this.setState({
+            isShowSave: true
+        })
     }
 
     startRecording() {
@@ -87,7 +90,6 @@ class MediaRecord extends Component {
         }
         console.log('Created MediaRecorder', this.mediaRecorder, 'with options', options);
         this.recordButton.textContent = 'Stop Recording';
-        this.playButton.disabled = true;
         this.mediaRecorder.onstop = this.handleStop;
         this.mediaRecorder.ondataavailable = (event) => {
             this.handleDataAvailable(event);
@@ -121,9 +123,16 @@ class MediaRecord extends Component {
                     <video id="recorded" ref={(c)=> this.recordedVideo = c} autoPlay loop controls></video>
                 }
                 <div>
-                    <button id="record" ref={(c)=> this.recordButton = c} onClick={this.toggleRecording}>Start Recording</button>
-                    <button id="play" ref={(c)=> this.playButton = c} onClick={this.play}>Play</button>
-                    <button onClick={this.save}>Save</button>
+                    <button id="record" ref={(c)=> this.recordButton = c} onClick={this.toggleRecording}>Start
+                        Recording
+                    </button>
+                    {
+                        this.state.isShowSave &&
+                        <div>
+                            <button id="play" onClick={this.play}>Play</button>
+                            <button onClick={this.save}>Save</button>
+                        </div>
+                    }
                 </div>
             </div>
         );

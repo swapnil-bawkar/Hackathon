@@ -34,7 +34,7 @@ class NoteTypeMenu extends Component {
                     this.state.isShowVideo &&
                     <ModalContainer onClose={this.handleClose}>
                         <ModalDialog onClose={this.handleClose}>
-                            <MediaRecorder></MediaRecorder>
+                            <MediaRecorder onSave={this.props.onSave}></MediaRecorder>
                         </ModalDialog>
                     </ModalContainer>
                 }

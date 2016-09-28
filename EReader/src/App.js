@@ -55,7 +55,10 @@ class App extends Component {
         });
     }
 
-    handleClose = () => this.setState({isShowingModal: false})
+    handleClose = () => {
+        this.viewer.Book.clearSelection();
+        this.setState({isShowingModal: false})
+    }
 
     handleVideoNoteClose = () => this.setState({isShowRecordedNote: false})
     
@@ -73,6 +76,7 @@ class App extends Component {
             this.setState({
                 notes: notes
             });
+            this.handleClose();
         });
     }
     goToNextPage = () => {
@@ -106,7 +110,7 @@ class App extends Component {
                 this.state.isShowingModal &&
                 <ModalContainer onClose={this.handleClose}>
                     <ModalDialog onClose={this.handleClose}>
-                        <NoteTypeMenu handleClose={this.handleClose}></NoteTypeMenu>
+                        <NoteTypeMenu handleClose={this.handleClose} onSave={this.save}></NoteTypeMenu>
                     </ModalDialog>
                 </ModalContainer>
             }
