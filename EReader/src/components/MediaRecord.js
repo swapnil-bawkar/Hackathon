@@ -110,6 +110,10 @@ class MediaRecord extends Component {
         this.mediaRecorder.stop();
     }
 
+    save = () => {
+        this.props.onSave(this.recordedBlobs);
+    }
+
     render() {
         return (
             <div>
@@ -124,6 +128,7 @@ class MediaRecord extends Component {
                 <div>
                     <button id="record" ref={(c)=> this.recordButton = c} onClick={this.toggleRecording}>Start Recording</button>
                     <button id="play" ref={(c)=> this.playButton = c} onClick={this.play}>Play</button>
+                    <button onClick={this.save}>Save</button>
                 </div>
             </div>
         );
