@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import left from '../public/arrow-left.svg';
 import right from '../public/arrow-right.svg';
 import VideoNote from './components/video-note';
-import NoteTypeMenu from './components/NoteType/note-type-menu';
+import MediaRecorder from './components/MediaRecord';
 
 /* globals Jigsaw */
 
@@ -110,7 +110,7 @@ class App extends Component {
                 this.state.isShowingModal &&
                 <ModalContainer onClose={this.handleClose}>
                     <ModalDialog onClose={this.handleClose}>
-                        <NoteTypeMenu handleClose={this.handleClose} onSave={this.save}></NoteTypeMenu>
+                        <MediaRecorder onSave={this.save}></MediaRecorder>
                     </ModalDialog>
                 </ModalContainer>
             }
